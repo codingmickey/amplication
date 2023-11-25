@@ -290,3 +290,5 @@ export interface LoadStaticFilesParams extends EventParams {
   source: string;
   basePath: string;
 }
+
+export interface CreateServerMainParams extends EventParams {}
