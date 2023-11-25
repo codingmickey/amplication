@@ -2280,3 +2280,11 @@ export type WorkspaceMemberType = Invitation | User;
 export type WorkspaceUpdateInput = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
+
+export type FormatType =
+  | "binary"
+  | "byte"
+  | "date"
+  | "date-time"
+  | "password"
+  | null;

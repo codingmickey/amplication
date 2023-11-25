@@ -77,6 +77,7 @@ export type EntityField = Omit<
   "__typename" | "createdAt" | "updatedAt" | "position" | "dataType"
 > & {
   dataType: models.EnumDataType;
+  format?: models.FormatType;
 };
 
 export type LookupResolvedProperties = Lookup & {
@@ -340,3 +341,11 @@ export type EntityComponents = {
   edit: EntityComponent;
   show: EntityComponent;
 };
+
+export type FormatType =
+  | "binary"
+  | "byte"
+  | "date"
+  | "date-time"
+  | "password"
+  | null;
