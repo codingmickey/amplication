@@ -1,11 +1,16 @@
 import path from "path";
 import { promises as fs } from "fs";
-import { Module, ModuleMap } from "@amplication/code-gen-types";
+import { EventNames, Module, ModuleMap } from "@amplication/code-gen-types";
 import { MAIN_TS_FILE_NAME, MAIN_TS_WITH_BIGINT_FILE_NAME } from "../constants";
 import DsgContext from "../../dsg-context";
 import { formatCode } from "@amplication/code-gen-utils";
+import pluginWrapper from "../../plugin-wrapper";
 
-export async function createMainFile() {
+export async function createMainFile(): Promise<Module[]> {
+  return pluginWrapper(createMainFileInternal, EventNames.CreateServerMain, {});
+}
+
+async function createMainFileInternal() {
   const { logger, serverDirectories, hasBigIntFields } = DsgContext.getInstance;
   const moduleMap = new ModuleMap(logger);
 
@@ -41,9 +46,14 @@ export async function createMainFile() {
     await moduleMap.set(mainModule);
   }
 
-  await logger.info("Formatting main.ts file...");
+  await logger.info("Formatting main.ts file...", { PATH: mainModule.path });
   await moduleMap.replaceModulesPath((path) => path.replace(".template", ""));
   await moduleMap.replaceModulesCode((path, code) => formatCode(path, code));
+
+  await logger.warn("ModuleMap", { MODULE_MAP: moduleMap });
+  await logger.warn("main.ts file content", {
+    CODE: moduleMap.get(mainModule.path),
+  });
 
   return moduleMap;
 }

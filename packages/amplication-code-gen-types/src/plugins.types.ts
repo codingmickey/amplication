@@ -112,6 +112,7 @@ export enum EventNames {
   CreateDTOs = "CreateDTOs",
   LoadStaticFiles = "LoadStaticFiles",
   CreateConnectMicroservices = "CreateConnectMicroservices",
+  CreateServerMain = "CreateServerMain",
 }
 
 export interface AmplicationPlugin {
