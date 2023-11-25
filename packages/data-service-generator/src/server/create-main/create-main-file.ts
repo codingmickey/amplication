@@ -6,7 +6,7 @@ import DsgContext from "../../dsg-context";
 import { formatCode } from "@amplication/code-gen-utils";
 import pluginWrapper from "../../plugin-wrapper";
 
-export async function createMainFile(): Promise<Module[]> {
+export async function createMainFile(): Promise<ModuleMap> {
   return pluginWrapper(createMainFileInternal, EventNames.CreateServerMain, {});
 }
 

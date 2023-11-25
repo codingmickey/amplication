@@ -105,7 +105,7 @@ async function createServerInternal(
 
   const typesRelatedFiles = await createTypesRelatedFiles();
 
-  await context.logger.info("Creating main file...");
+  await context.logger.info("Creating main.ts file...");
   const mainFile = await createMainFile();
 
   await context.logger.info("Creating Prisma schema...");
