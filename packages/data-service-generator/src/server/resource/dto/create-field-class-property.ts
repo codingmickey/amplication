@@ -151,6 +151,8 @@ export const ENUM = "enum";
 export const ENUM_ID = builders.identifier(ENUM);
 export const REQUIRED = "required";
 export const REQUIRED_ID = builders.identifier(REQUIRED);
+export const FORMAT = "format";
+export const FORMAT_ID = builders.identifier(FORMAT);
 export const TYPE = "type";
 export const TYPE_ID = builders.identifier(TYPE);
 export const JSON_ID = builders.identifier("JSON");
@@ -312,6 +314,13 @@ export function createFieldClassProperty(
       )
     );
   }
+
+  if (field.format !== null && field.format !== undefined) {
+    apiPropertyDecoratorBuilder.formatType(
+      builders.stringLiteral(field.format)
+    );
+  }
+
   decorators.unshift(apiPropertyDecoratorBuilder.build());
   return classProperty(
     id,

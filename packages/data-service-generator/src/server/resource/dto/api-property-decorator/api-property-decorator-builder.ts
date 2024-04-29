@@ -1,6 +1,7 @@
 import { builders, namedTypes } from "ast-types";
 import {
   ENUM_ID,
+  FORMAT_ID,
   IS_ARRAY_ID,
   REQUIRED_ID,
   TRUE_LITERAL,
@@ -43,7 +44,13 @@ export class ApiPropertyDecoratorBuilder {
     this.apiPropertyOptionsObjectExpression.properties.push(property);
     return this;
   }
+  formatType(type: namedTypes.StringLiteral): this {
+    this.apiPropertyOptionsObjectExpression.properties.push(
+      builders.objectProperty(FORMAT_ID, type)
+    );
 
+    return this;
+  }
   enum(enumId: namedTypes.Identifier): this {
     const enumAPIProperty = builders.objectProperty(ENUM_ID, enumId);
     this.apiPropertyOptionsObjectExpression.properties.push(enumAPIProperty);
